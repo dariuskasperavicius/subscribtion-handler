@@ -140,6 +140,7 @@ class Transaction
 
     public function setSubscription(Subscription $subscription): void
     {
+        $subscription->addTransaction($this);
         $this->subscription = $subscription;
     }
 }
