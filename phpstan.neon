@@ -1,0 +1,13 @@
+includes:
+    - vendor/phpstan/phpstan-symfony/extension.neon
+
+parameters:
+    level: 5
+    checkMissingIterableValueType: false
+    paths:
+        - src
+    excludes_analyse:
+        - '%rootDir%/../../../src/Kernel.php'
+        - '%rootDir%/../../../src/Kernel.php'
+        - '%rootDir%/../../../tests'
+
