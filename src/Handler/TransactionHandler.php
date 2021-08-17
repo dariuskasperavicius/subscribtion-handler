@@ -2,16 +2,13 @@
 
 namespace App\Handler;
 
+use App\Entity\Subscription;
 use App\Entity\Transaction;
 use App\Exception\OperationFailedException;
 use App\Provider\AppStore\TransactionFactoryInterface;
 use App\Repository\SubscriptionRepository;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\Exception\JsonException;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class TransactionHandler
 {
@@ -27,10 +24,8 @@ class TransactionHandler
         $this->logger = $logger;
     }
 
-    public function handleTransaction(Request $request, TransactionFactoryInterface $transactionFactory): void
+    public function handleTransaction(array $data, TransactionFactoryInterface $transactionFactory): void
     {
-        $data = $this->getJson($request);
-
         try {
             $transaction = $transactionFactory->createTransaction($data);
             $this->updateSubscription($transaction);
@@ -49,7 +44,7 @@ class TransactionHandler
         );
 
         if ($subscription === null) {
-            throw new OperationFailedException('Subscription was not found');
+            $subscription = new Subscription();
         }
 
         $transaction->setSubscription($subscription);
@@ -60,9 +55,7 @@ class TransactionHandler
                 break;
             case (Transaction::INITIAL):
             case (Transaction::DID_RENEW):
-                $subscription->setEndDate(
-                    $transaction->getEndDate()
-                );
+                $subscription->setEndDate($transaction->getEndDate());
                 $subscription->setAutoRenew(true);
                 $subscription->setActive(true);
                 break;
@@ -70,22 +63,5 @@ class TransactionHandler
             default:
                 //do nothing
         }
-    }
-
-    /**
-     * @param Request $request
-     * @return array
-     *
-     * @throws HttpException
-     */
-    private function getJson(Request $request): array
-    {
-        try {
-            $content = $request->getContent();
-            $data = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException $exception) {
-            throw new HttpException(Response::HTTP_NOT_FOUND, 'Invalid json', $exception);
-        }
-        return $data;
     }
 }

@@ -1,0 +1,44 @@
+{
+  "auto_renew_product_id": "product_id",
+  "auto_renew_status": "false",
+  "bid": "com.namespace",
+  "bvrs": "1111111",
+  "environment": "PROD",
+  "notification_type": "INITIAL_BUY",
+  "password": "pass",
+  "unified_receipt": {
+    "latest_receipt": "receipt_data",
+    "pending_renewal_info": [
+      {
+        "original_transaction_id": "123456789",
+        "product_id": "product_id",
+        "auto_renew_status": "1",
+        "auto_renew_product_id": "product_id"
+      }
+    ],
+    "environment": "Production",
+    "status": 0,
+    "latest_receipt_info": [
+      {
+        "expires_date_pst": "2022-01-04 22:24:14 America/Los_Angeles",
+        "purchase_date": "2021-07-05 05:24:14 Etc/GMT",
+        "in_app_ownership_type": "PURCHASED",
+        "purchase_date_ms": "1625462654000",
+        "original_purchase_date_ms": "1625462656000",
+        "transaction_id": "65164516416",
+        "original_transaction_id": "123456789",
+        "quantity": "1",
+        "expires_date_ms": "1641363854000",
+        "original_purchase_date_pst": "2021-07-04 22:24:16 America/Los_Angeles",
+        "product_id": "product_id",
+        "subscription_group_identifier": "3516716471",
+        "web_order_line_item_id": "651671651151",
+        "expires_date": "2022-01-05 06:24:14 Etc/GMT",
+        "is_in_intro_offer_period": "false",
+        "original_purchase_date": "2021-07-05 05:24:16 Etc/GMT",
+        "purchase_date_pst": "2021-07-04 22:24:14 America/Los_Angeles",
+        "is_trial_period": "false"
+      }
+    ]
+  }
+}

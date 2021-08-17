@@ -14,7 +14,7 @@ use DateTime;
  * @ORM\Table(
  * )
  */
-class Subscribtion
+class Subscription
 {
     /**
      * @ORM\Id
@@ -52,7 +52,7 @@ class Subscribtion
     /**
      * @ORM\Column(type="datetime")
      */
-    private DateTimeInterface $endDate;
+    private ?DateTimeInterface $endDate = null;
 
     /**
      * @ORM\Column(type="datetime_immutable")
@@ -119,12 +119,12 @@ class Subscribtion
         $this->period = $period;
     }
 
-    public function getEndDate(): DateTimeInterface
+    public function getEndDate(): ?DateTimeInterface
     {
         return $this->endDate;
     }
 
-    public function setEndDate(DateTimeInterface $endDate): void
+    public function setEndDate(?DateTimeInterface $endDate): void
     {
         $this->endDate = $endDate;
     }

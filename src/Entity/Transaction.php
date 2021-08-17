@@ -4,11 +4,12 @@
 
 namespace App\Entity;
 
+use App\Repository\SubscriptionRepository;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeInterface;
 
 /**
- * @ORM\Entity(repositoryClass=SubscribtionRepository::class)
+ * @ORM\Entity(repositoryClass=SubscriptionRepository::class)
  * @ORM\Table(
  * )
  */
@@ -42,10 +43,10 @@ class Transaction
     private string $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Subscribtion", inversedBy="transaction", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Subscription", inversedBy="transaction", cascade={"persist"})
      * @ORM\JoinColumn(onDelete="CASCADE")
      */
-    private Subscribtion $subscription;
+    private Subscription $subscription;
 
     /**
      * @ORM\Column(type="datetime")
@@ -60,7 +61,7 @@ class Transaction
     /**
      * @ORM\Column(type="datetime")
      */
-    private ?DateTimeInterface $endDate;
+    private ?DateTimeInterface $endDate = null;
 
     public function getId(): int
     {
@@ -132,12 +133,12 @@ class Transaction
         $this->endDate = $endDate;
     }
 
-    public function getSubscription(): Subscribtion
+    public function getSubscription(): Subscription
     {
         return $this->subscription;
     }
 
-    public function setSubscription(Subscribtion $subscription): void
+    public function setSubscription(Subscription $subscription): void
     {
         $this->subscription = $subscription;
     }

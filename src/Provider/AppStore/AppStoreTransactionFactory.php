@@ -31,7 +31,7 @@ class AppStoreTransactionFactory implements TransactionFactoryInterface
         $this->validate($data);
 
         $transaction = new Transaction();
-        $transaction->setTransactionId($data['unified_receipt']['latest_receipt_info']['transaction_id']);
+        $transaction->setTransactionId($data['unified_receipt']['latest_receipt_info'][0]['transaction_id']);
         $transaction->setProductId($data['auto_renew_product_id']);
 
         $endDate = $data['unified_receipt']['latest_receipt_info']['expires_date'] ?? null;
